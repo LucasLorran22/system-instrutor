@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Instrutores - e-Instrutor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .search-container {
+            min-height: 100vh;
+            background: #f8fafc;
+            padding-top: 100px;
+        }
+
+        .search-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .search-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .search-header p {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .search-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .filters-sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .filters-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .price-range input {
+            flex: 1;
+        }
+
+        .rating-filter {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .rating-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.3rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .rating-option:hover {
+            background: #f3f4f6;
+        }
+
+        .rating-option input[type="radio"] {
+            width: auto;
+        }
+
+        .clear-filters {
+            width: 100%;
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .clear-filters:hover {
+            background: #4b5563;
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .instructor-card {
+            background: white;
+            border: 2px solid #f3f4f6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .instructor-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructor-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .instructor-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e5e7eb;
+        }
+
+        .instructor-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .instructor-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-text {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .instructor-location {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .instructor-details {
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-label {
+            color: #6b7280;
+        }
+
+        .detail-value {
+            font-weight: 500;
+            color: #1f2937;
+        }
+
+        .price-highlight {
+            color: #059669;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .instructor-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .specialty-tag {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .instructor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-contact {
+            flex: 1;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-contact:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-profile {
+            background: #f3f4f6;
+            color: #374151;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-profile:hover {
+            background: #e5e7eb;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #d1d5db;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .search-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .filters-sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .results-section {
+                order: 1;
+            }
+
+            .instructors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-header h1 {
+                font-size: 2rem;
+            }
+
+            .instructor-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-car"></i>
+                    <span>e-Instrutor</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="buscar-instrutores.html" class="nav-link">Buscar Instrutores</a></li>
+                    <li><a href="login.html" class="nav-link login-btn">Entrar</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <div class="search-header">
+            <div class="container">
+                <h1>Encontre seu Instrutor Ideal</h1>
+                <p>Mais de 1000 instrutores qualificados em todo o Brasil</p>
+            </div>
+        </div>
+
+        <div class="search-content">
+            <!-- Filtros -->
+            <aside class="filters-sidebar">
+                <h3 class="filters-title">
+                    <i class="fas fa-filter"></i>
+                    Filtros
+                </h3>
+
+                <div class="filter-group">
+                    <label for="cidadeFiltro">Cidade</label>
+                    <input type="text" id="cidadeFiltro" placeholder="Digite a cidade">
+                </div>
+
+                <div class="filter-group">
+                    <label for="cambioFiltro">Tipo de Câmbio</label>
+                    <select id="cambioFiltro">
+                        <option value="">Todos</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Automático">Automático</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Faixa de Preço (por aula)</label>
+                    <div class="price-range">
+                        <input type="number" id="precoMin" placeholder="Min" min="0" max="200">
+                        <span>até</span>
+                        <input type="number" id="precoMax" placeholder="Max" min="0" max="200">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Avaliação Mínima</label>
+                    <div class="rating-filter">
+                        <div class="rating-option">
+                            <input type="radio" id="rating5" name="rating" value="5">
+                            <label for="rating5">
+                                <span class="stars">★★★★★</span>
+                                <span>(5.0)</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating4" name="rating" value="4">
+                            <label for="rating4">
+                                <span class="stars">★★★★☆</span>
+                                <span>(4.0+)</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="rating3" name="rating" value="3">
+                            <label for="rating3">
+                                <span class="stars">★★★☆☆</span>
+                                <span>(3.0+)</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="ratingAll" name="rating" value="0" checked>
+                            <label for="ratingAll">Todas as avaliações</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="clear-filters" onclick="clearFilters()">
+                    <i class="fas fa-times"></i>
+                    Limpar Filtros
+                </button>
+            </aside>
+
+            <!-- Resultados -->
+            <main class="results-section">
+                <div class="results-header">
+                    <div class="results-count" id="resultsCount">
+                        Carregando instrutores...
+                    </div>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="relevancia">Mais Relevantes</option>
+                        <option value="avaliacao">Melhor Avaliados</option>
+                        <option value="preco-menor">Menor Preço</option>
+                        <option value="preco-maior">Maior Preço</option>
+                        <option value="experiencia">Mais Experientes</option>
+                    </select>
+                </div>
+
+                <div id="loadingIndicator" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Carregando instrutores...</p>
+                </div>
+
+                <div id="instructorsGrid" class="instructors-grid" style="display: none;">
+                    <!-- Instrutores serão carregados aqui via JavaScript -->
+                </div>
+
+                <div id="noResults" class="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>Nenhum instrutor encontrado</h3>
+                    <p>Tente ajustar os filtros para encontrar mais resultados.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let instrutorSearch;
+        let currentResults = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            instrutorSearch = new InstrutorSearch();
+            
+            // Simular carregamento
+            setTimeout(() => {
+                loadInstructors();
+                setupEventListeners();
+            }, 1000);
+        });
+
+        function loadInstructors() {
+            const filtros = getFilters();
+            currentResults = instrutorSearch.buscar(filtros);
+            
+            displayResults(currentResults);
+            updateResultsCount(currentResults.length);
+            
+            document.getElementById('loadingIndicator').style.display = 'none';
+            document.getElementById('instructorsGrid').style.display = 'grid';
+        }
+
+        function getFilters() {
+            return {
+                cidade: document.getElementById('cidadeFiltro').value,
+                cambio: document.getElementById('cambioFiltro').value,
+                valorMin: parseInt(document.getElementById('precoMin').value) || 0,
+                valorMax: parseInt(document.getElementById('precoMax').value) || 200,
+                avaliacao: parseFloat(document.querySelector('input[name="rating"]:checked').value) || 0
+            };
+        }
+
+        function displayResults(instrutores) {
+            const grid = document.getElementById('instructorsGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (instrutores.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            grid.innerHTML = instrutores.map(instrutor => createInstructorCard(instrutor)).join('');
+        }
+
+        function createInstructorCard(instrutor) {
+            return `
+                <div class="instructor-card" onclick="viewProfile(${instrutor.id})">
+                    <div class="instructor-header">
+                        <img src="${instrutor.foto}" alt="${instrutor.nome}" class="instructor-photo">
+                        <div class="instructor-info">
+                            <h3>${instrutor.nome}</h3>
+                            <div class="instructor-rating">
+                                <span class="stars">${Utils.gerarEstrelas(instrutor.avaliacao)}</span>
+                                <span class="rating-text">${instrutor.avaliacao} (${instrutor.totalAvaliacoes} avaliações)</span>
+                            </div>
+                            <div class="instructor-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${instrutor.cidade}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="instructor-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Experiência:</span>
+                            <span class="detail-value">${instrutor.experiencia}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Veículo:</span>
+                            <span class="detail-value">${instrutor.veiculo}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Câmbio:</span>
+                            <span class="detail-value">${instrutor.cambio}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Valor por aula:</span>
+                            <span class="detail-value price-highlight">${Utils.formatarMoeda(instrutor.valorAula)}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="instructor-specialties">
+                        ${instrutor.especialidades.map(esp => `<span class="specialty-tag">${esp}</span>`).join('')}
+                    </div>
+                    
+                    <p class="instructor-description">${instrutor.descricao}</p>
+                    
+                    <div class="instructor-actions">
+                        <button class="btn-contact" onclick="event.stopPropagation(); contactInstructor(${instrutor.id})">
+                            <i class="fas fa-phone"></i>
+                            Entrar em Contato
+                        </button>
+                        <button class="btn-profile" onclick="event.stopPropagation(); viewProfile(${instrutor.id})">
+                            <i class="fas fa-user"></i>
+                            Ver Perfil
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function setupEventListeners() {
+            // Filtros em tempo real
+            document.getElementById('cidadeFiltro').addEventListener('input', debounce(loadInstructors, 500));
+            document.getElementById('cambioFiltro').addEventListener('change', loadInstructors);
+            document.getElementById('precoMin').addEventListener('input', debounce(loadInstructors, 500));
+            document.getElementById('precoMax').addEventListener('input', debounce(loadInstructors, 500));
+            
+            document.querySelectorAll('input[name="rating"]').forEach(radio => {
+                radio.addEventListener('change', loadInstructors);
+            });
+
+            // Ordenação
+            document.getElementById('sortSelect').addEventListener('change', function() {
+                sortResults(this.value);
+            });
+        }
+
+        function sortResults(sortBy) {
+            let sorted = [...currentResults];
+            
+            switch(sortBy) {
+                case 'avaliacao':
+                    sorted.sort((a, b) => b.avaliacao - a.avaliacao);
+                    break;
+                case 'preco-menor':
+                    sorted.sort((a, b) => a.valorAula - b.valorAula);
+                    break;
+                case 'preco-maior':
+                    sorted.sort((a, b) => b.valorAula - a.valorAula);
+                    break;
+                case 'experiencia':
+                    sorted.sort((a, b) => {
+                        const aExp = parseInt(a.experiencia);
+                        const bExp = parseInt(b.experiencia);
+                        return bExp - aExp;
+                    });
+                    break;
+                default:
+                    // Relevância (manter ordem original)
+                    break;
+            }
+            
+            displayResults(sorted);
+        }
+
+        function clearFilters() {
+            document.getElementById('cidadeFiltro').value = '';
+            document.getElementById('cambioFiltro').value = '';
+            document.getElementById('precoMin').value = '';
+            document.getElementById('precoMax').value = '';
+            document.getElementById('ratingAll').checked = true;
+            
+            loadInstructors();
+        }
+
+        function updateResultsCount(count) {
+            const resultsCount = document.getElementById('resultsCount');
+            if (count === 0) {
+                resultsCount.textContent = 'Nenhum instrutor encontrado';
+            } else if (count === 1) {
+                resultsCount.textContent = '1 instrutor encontrado';
+            } else {
+                resultsCount.textContent = `${count} instrutores encontrados`;
+            }
+        }
+
+        function contactInstructor(id) {
+            const instrutor = instrutorSearch.getById(id);
+            if (instrutor) {
+                alert(`Entrando em contato com ${instrutor.nome}...\n\nEm um sistema real, isso abriria um chat ou formulário de contato.`);
+            }
+        }
+
+        function viewProfile(id) {
+            // Em um sistema real, isso navegaria para a página de perfil do instrutor
+            window.location.href = `perfil-instrutor.html?id=${id}`;
+        }
+
+        // Função debounce para evitar muitas chamadas durante a digitação
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>

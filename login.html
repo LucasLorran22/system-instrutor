@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - e-Instrutor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem 0;
+        }
+
+        .login-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            color: #1f2937;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: auto;
+        }
+
+        .forgot-password {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            color: #6b7280;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+        }
+
+        .register-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .register-btn {
+            padding: 0.8rem 1rem;
+            border: 2px solid #e5e7eb;
+            background: white;
+            color: #374151;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .register-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .error-message {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #dc2626;
+            display: none;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            color: #16a34a;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #16a34a;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .login-wrapper {
+                margin: 1rem;
+                padding: 2rem;
+            }
+
+            .register-links {
+                grid-template-columns: 1fr;
+            }
+
+            .back-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 1rem;
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Voltar
+        </a>
+        
+        <div class="container">
+            <div class="login-wrapper">
+                <div class="login-header">
+                    <div class="logo">
+                        <i class="fas fa-car"></i>
+                        <span>e-Instrutor</span>
+                    </div>
+                    <h1>Bem-vindo de volta!</h1>
+                    <p>Faça login para acessar sua conta</p>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+				
+				<a href="buscar-instrutores.html">	
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="lembrarMe" name="lembrarMe">
+                            <label for="lembrarMe">Lembrar de mim</label>
+                        </div>
+                        <a href="#" class="forgot-password">Esqueci minha senha</a>
+                    </div>
+					
+				
+                    <button type=""class="login-btn" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Entrar
+                    </button>
+				
+					
+					
+                </form>
+				</a>
+                <div class="divider">
+                    <span>Não tem uma conta?</span>
+                </div>
+
+                <div class="register-links">
+                    <a href="cadastro-aluno.html" class="register-btn">
+                        <i class="fas fa-user-graduate"></i>
+                        Sou Aluno
+                    </a>
+                    <a href="cadastro-instrutor.html" class="register-btn">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        Sou Instrutor
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+
+            // Verificar se já está logado
+            if (auth.isLoggedIn()) {
+                const user = auth.getCurrentUser();
+                showSuccess(`Você já está logado como ${user.nome}`);
+                setTimeout(() => {
+                    redirectUser(user);
+                }, 2000);
+                return;
+            }
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const senha = document.getElementById('senha').value;
+                
+                // Validações básicas
+                if (!Utils.validarEmail(email)) {
+                    showError('Por favor, insira um e-mail válido.');
+                    return;
+                }
+
+                if (senha.length < 6) {
+                    showError('A senha deve ter pelo menos 6 caracteres.');
+                    return;
+                }
+
+                // Desabilitar botão e mostrar loading
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<div class="loading"></div> Entrando...';
+
+                // Simular delay de autenticação
+                setTimeout(() => {
+                    try {
+                        const user = auth.login(email, senha);
+                        showSuccess(`Bem-vindo, ${user.nome}!`);
+                        
+                        // Salvar preferência "lembrar de mim"
+                        if (document.getElementById('lembrarMe').checked) {
+                            localStorage.setItem('rememberUser', 'true');
+                        }
+
+                        setTimeout(() => {
+                            redirectUser(user);
+                        }, 1500);
+
+                    } catch (error) {
+                        showError(error.message);
+                        loginBtn.disabled = false;
+                        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar';
+                    }
+                }, 1000);
+            });
+
+            // Funções auxiliares
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+            }
+
+            function redirectUser(user) {
+                if (user.type === 'aluno') {
+                    window.location.href = 'painel-aluno.html';
+                } else if (user.type === 'instrutor') {
+                    window.location.href = 'painel-instrutor.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            }
+
+            // Preencher campos se houver dados salvos
+            const savedEmail = localStorage.getItem('savedEmail');
+            if (savedEmail) {
+                document.getElementById('email').value = savedEmail;
+                document.getElementById('lembrarMe').checked = true;
+            }
+
+            // Salvar email quando "lembrar de mim" estiver marcado
+            document.getElementById('lembrarMe').addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('savedEmail', document.getElementById('email').value);
+                } else {
+                    localStorage.removeItem('savedEmail');
+                }
+            });
+
+            // Esqueci minha senha
+            document.querySelector('.forgot-password').addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                
+                if (!email) {
+                    showError('Por favor, insira seu e-mail primeiro.');
+                    return;
+                }
+
+                if (!Utils.validarEmail(email)) {
+                    showError('Por favor, insira um e-mail válido.');
+                    return;
+                }
+
+                // Simular envio de email de recuperação
+                showSuccess('Instruções de recuperação de senha foram enviadas para seu e-mail.');
+            });
+
+            // Adicionar alguns usuários de teste se não existirem
+            if (!localStorage.getItem('users')) {
+                const testUsers = [
+                    {
+                        id: 1,
+                        nome: 'João Silva',
+                        email: 'joao@teste.com',
+                        senha: '123456',
+                        type: 'instrutor',
+                        active: true,
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        nome: 'Maria Santos',
+                        email: 'maria@teste.com',
+                        senha: '123456',
+                        type: 'aluno',
+                        active: true,
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                localStorage.setItem('users', JSON.stringify(testUsers));
+            }
+        });
+    </script>
+</body>
+</html>
