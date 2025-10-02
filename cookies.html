@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Cookies - e-Instrutor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .legal-container {
+            min-height: 100vh;
+            background: #f8fafc;
+            padding-top: 100px;
+        }
+
+        .legal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .legal-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .legal-header p {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .legal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+        }
+
+        .last-updated {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: #1f2937;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section h3 {
+            color: #374151;
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        .section p {
+            color: #6b7280;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            color: #6b7280;
+            line-height: 1.7;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookie-table th,
+        .cookie-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .cookie-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .cookie-table td {
+            color: #6b7280;
+        }
+
+        .cookie-type {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .cookie-essential {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .cookie-functional {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .cookie-analytics {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .cookie-marketing {
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        .cookie-settings {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #e5e7eb;
+            margin: 2rem 0;
+        }
+
+        .cookie-settings h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cookie-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .cookie-option-info h4 {
+            color: #374151;
+            margin-bottom: 0.3rem;
+        }
+
+        .cookie-option-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #d1d5db;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #10b981;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::before {
+            transform: translateX(30px);
+        }
+
+        .toggle-switch.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .save-preferences {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .save-preferences:hover {
+            background: #1d4ed8;
+        }
+
+        .contact-info {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #2563eb;
+            margin-top: 2rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2563eb;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .legal-content {
+                margin: 1rem;
+                padding: 2rem;
+            }
+
+            .legal-header h1 {
+                font-size: 2rem;
+            }
+
+            .cookie-table {
+                font-size: 0.9rem;
+            }
+
+            .cookie-table th,
+            .cookie-table td {
+                padding: 0.8rem;
+            }
+
+            .cookie-option {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-car"></i>
+                    <span>e-Instrutor</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="buscar-instrutores.html" class="nav-link">Buscar Instrutores</a></li>
+                    <li><a href="login.html" class="nav-link login-btn">Entrar</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="legal-container">
+        <div class="legal-header">
+            <div class="container">
+                <h1>Política de Cookies</h1>
+                <p>Como utilizamos cookies para melhorar sua experiência</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Voltar ao Início
+            </a>
+
+            <div class="legal-content">
+                <div class="last-updated">
+                    <i class="fas fa-calendar-alt"></i>
+                    Última atualização: 02 de outubro de 2024
+                </div>
+
+                <div class="section">
+                    <h2>1. O que são Cookies?</h2>
+                    <p>
+                        Cookies são pequenos arquivos de texto que são armazenados no seu dispositivo 
+                        (computador, tablet ou smartphone) quando você visita um site. Eles são amplamente 
+                        utilizados para fazer os sites funcionarem de forma mais eficiente, bem como para 
+                        fornecer informações aos proprietários do site.
+                    </p>
+                    <p>
+                        Os cookies podem ser "persistentes" (permanecem no seu dispositivo por um período 
+                        determinado) ou "de sessão" (são excluídos quando você fecha o navegador).
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2>2. Como Utilizamos Cookies</h2>
+                    <p>
+                        A e-Instrutor utiliza cookies para diversos propósitos, sempre visando melhorar 
+                        sua experiência na plataforma e fornecer serviços personalizados e eficientes.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2>3. Tipos de Cookies que Utilizamos</h2>
+                    
+                    <table class="cookie-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Finalidade</th>
+                                <th>Duração</th>
+                                <th>Consentimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="cookie-type cookie-essential">Essenciais</span>
+                                </td>
+                                <td>Necessários para o funcionamento básico do site</td>
+                                <td>Sessão</td>
+                                <td>Não requerido</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="cookie-type cookie-functional">Funcionais</span>
+                                </td>
+                                <td>Lembrar preferências e configurações do usuário</td>
+                                <td>1 ano</td>
+                                <td>Opcional</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="cookie-type cookie-analytics">Analíticos</span>
+                                </td>
+                                <td>Analisar como os usuários interagem com o site</td>
+                                <td>2 anos</td>
+                                <td>Opcional</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="cookie-type cookie-marketing">Marketing</span>
+                                </td>
+                                <td>Personalizar anúncios e conteúdo</td>
+                                <td>1 ano</td>
+                                <td>Opcional</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h2>4. Detalhamento dos Cookies</h2>
+                    
+                    <h3>4.1 Cookies Essenciais</h3>
+                    <p>
+                        Estes cookies são estritamente necessários para o funcionamento do site e não 
+                        podem ser desativados. Eles incluem:
+                    </p>
+                    <ul>
+                        <li>Cookies de autenticação (manter você logado)</li>
+                        <li>Cookies de segurança (proteção contra ataques)</li>
+                        <li>Cookies de carrinho de compras</li>
+                        <li>Cookies de preferências de idioma</li>
+                    </ul>
+
+                    <h3>4.2 Cookies Funcionais</h3>
+                    <p>
+                        Estes cookies permitem que o site lembre de escolhas que você faz e forneça 
+                        recursos aprimorados e mais personalizados:
+                    </p>
+                    <ul>
+                        <li>Lembrar suas preferências de filtros de busca</li>
+                        <li>Salvar configurações de exibição</li>
+                        <li>Manter preferências de localização</li>
+                    </ul>
+
+                    <h3>4.3 Cookies Analíticos</h3>
+                    <p>
+                        Estes cookies nos ajudam a entender como os visitantes interagem com o site, 
+                        coletando e relatando informações anonimamente:
+                    </p>
+                    <ul>
+                        <li>Google Analytics (análise de tráfego)</li>
+                        <li>Hotjar (mapas de calor e gravações de sessão)</li>
+                        <li>Métricas de performance do site</li>
+                    </ul>
+
+                    <h3>4.4 Cookies de Marketing</h3>
+                    <p>
+                        Estes cookies são usados para tornar as mensagens publicitárias mais relevantes 
+                        para você:
+                    </p>
+                    <ul>
+                        <li>Facebook Pixel (remarketing)</li>
+                        <li>Google Ads (publicidade direcionada)</li>
+                        <li>Cookies de redes sociais</li>
+                    </ul>
+                </div>
+
+                <div class="cookie-settings">
+                    <h3><i class="fas fa-cog"></i> Configurações de Cookies</h3>
+                    <p>Você pode controlar quais cookies deseja aceitar:</p>
+                    
+                    <div class="cookie-option">
+                        <div class="cookie-option-info">
+                            <h4>Cookies Essenciais</h4>
+                            <p>Necessários para o funcionamento básico do site</p>
+                        </div>
+                        <div class="toggle-switch active disabled" data-type="essential">
+                        </div>
+                    </div>
+
+                    <div class="cookie-option">
+                        <div class="cookie-option-info">
+                            <h4>Cookies Funcionais</h4>
+                            <p>Melhoram a funcionalidade e personalização</p>
+                        </div>
+                        <div class="toggle-switch active" data-type="functional">
+                        </div>
+                    </div>
+
+                    <div class="cookie-option">
+                        <div class="cookie-option-info">
+                            <h4>Cookies Analíticos</h4>
+                            <p>Nos ajudam a entender como você usa o site</p>
+                        </div>
+                        <div class="toggle-switch" data-type="analytics">
+                        </div>
+                    </div>
+
+                    <div class="cookie-option">
+                        <div class="cookie-option-info">
+                            <h4>Cookies de Marketing</h4>
+                            <p>Personalizam anúncios e conteúdo</p>
+                        </div>
+                        <div class="toggle-switch" data-type="marketing">
+                        </div>
+                    </div>
+
+                    <button class="save-preferences" onclick="saveCookiePreferences()">
+                        <i class="fas fa-save"></i>
+                        Salvar Preferências
+                    </button>
+                </div>
+
+                <div class="section">
+                    <h2>5. Cookies de Terceiros</h2>
+                    <p>
+                        Alguns cookies são definidos por serviços de terceiros que aparecem em nossas páginas. 
+                        Não temos controle sobre esses cookies, mas você pode desativá-los diretamente 
+                        nos sites dos terceiros ou através das configurações do seu navegador.
+                    </p>
+                    <p>Principais terceiros que podem definir cookies:</p>
+                    <ul>
+                        <li><strong>Google:</strong> Analytics, Ads, Maps</li>
+                        <li><strong>Facebook:</strong> Pixel, Social Plugins</li>
+                        <li><strong>Hotjar:</strong> Análise de comportamento</li>
+                        <li><strong>Stripe:</strong> Processamento de pagamentos</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>6. Como Gerenciar Cookies</h2>
+                    
+                    <h3>6.1 Configurações do Navegador</h3>
+                    <p>
+                        Você pode controlar e/ou excluir cookies conforme desejar através das 
+                        configurações do seu navegador:
+                    </p>
+                    <ul>
+                        <li><strong>Chrome:</strong> Configurações > Privacidade e segurança > Cookies</li>
+                        <li><strong>Firefox:</strong> Opções > Privacidade e Segurança</li>
+                        <li><strong>Safari:</strong> Preferências > Privacidade</li>
+                        <li><strong>Edge:</strong> Configurações > Cookies e permissões do site</li>
+                    </ul>
+
+                    <h3>6.2 Ferramentas de Opt-out</h3>
+                    <p>Você também pode usar ferramentas específicas para opt-out:</p>
+                    <ul>
+                        <li><strong>Google Analytics:</strong> <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" style="color: #2563eb;">Opt-out do Google Analytics</a></li>
+                        <li><strong>Facebook:</strong> Configurações de anúncios no Facebook</li>
+                        <li><strong>Network Advertising Initiative:</strong> <a href="http://www.networkadvertising.org/choices/" target="_blank" style="color: #2563eb;">NAI Opt-out</a></li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>7. Consequências de Desativar Cookies</h2>
+                    <p>
+                        Se você escolher desativar cookies, algumas funcionalidades do site podem 
+                        não funcionar corretamente:
+                    </p>
+                    <ul>
+                        <li>Você pode precisar fazer login repetidamente</li>
+                        <li>Suas preferências podem não ser salvas</li>
+                        <li>Alguns recursos personalizados podem não funcionar</li>
+                        <li>A experiência geral pode ser menos otimizada</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>8. Atualizações desta Política</h2>
+                    <p>
+                        Esta Política de Cookies pode ser atualizada periodicamente para refletir 
+                        mudanças em nossas práticas ou por outros motivos operacionais, legais ou 
+                        regulamentares. Recomendamos que você revise esta política regularmente.
+                    </p>
+                </div>
+
+                <div class="contact-info">
+                    <h3><i class="fas fa-envelope"></i> Contato</h3>
+                    <p>
+                        Se você tiver dúvidas sobre nossa Política de Cookies, entre em contato conosco:
+                    </p>
+                    <p>
+                        <strong>E-mail:</strong> cookies@e-instrutor.com.br<br>
+                        <strong>Telefone:</strong> (11) 9999-9999<br>
+                        <strong>Endereço:</strong> Rua das Aulas, 123 - São Paulo, SP
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Gerenciamento de preferências de cookies
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCookiePreferences();
+            setupToggleSwitches();
+        });
+
+        function setupToggleSwitches() {
+            const toggles = document.querySelectorAll('.toggle-switch:not(.disabled)');
+            
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        }
+
+        function loadCookiePreferences() {
+            const preferences = JSON.parse(localStorage.getItem('cookiePreferences')) || {
+                essential: true,
+                functional: true,
+                analytics: false,
+                marketing: false
+            };
+
+            Object.keys(preferences).forEach(type => {
+                const toggle = document.querySelector(`[data-type="${type}"]`);
+                if (toggle && !toggle.classList.contains('disabled')) {
+                    if (preferences[type]) {
+                        toggle.classList.add('active');
+                    } else {
+                        toggle.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        function saveCookiePreferences() {
+            const preferences = {
+                essential: true, // Sempre ativo
+                functional: document.querySelector('[data-type="functional"]').classList.contains('active'),
+                analytics: document.querySelector('[data-type="analytics"]').classList.contains('active'),
+                marketing: document.querySelector('[data-type="marketing"]').classList.contains('active')
+            };
+
+            localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
+            
+            // Simular aplicação das preferências
+            applyCookiePreferences(preferences);
+            
+            // Mostrar confirmação
+            notifications.show('Preferências de cookies salvas com sucesso!', 'success');
+        }
+
+        function applyCookiePreferences(preferences) {
+            // Em um site real, aqui seria implementada a lógica para:
+            // - Ativar/desativar scripts de analytics
+            // - Ativar/desativar pixels de marketing
+            // - Configurar cookies funcionais
+            
+            console.log('Aplicando preferências de cookies:', preferences);
+            
+            // Exemplo de implementação:
+            if (!preferences.analytics) {
+                // Desativar Google Analytics
+                console.log('Google Analytics desativado');
+            }
+            
+            if (!preferences.marketing) {
+                // Desativar pixels de marketing
+                console.log('Cookies de marketing desativados');
+            }
+        }
+
+        // Verificar se é a primeira visita e mostrar banner de cookies
+        if (!localStorage.getItem('cookiePreferences')) {
+            // Em um site real, aqui seria mostrado um banner de cookies
+            console.log('Primeira visita - mostrar banner de cookies');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Aluno - e-Instrutor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            min-height: 100vh;
+            background: #f8fafc;
+            padding-top: 100px;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .welcome-text h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-header {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-header:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            color: #6b7280;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-card i {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+
+        .action-card h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-card p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .instructor-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .instructor-card {
+            background: white;
+            border: 2px solid #f3f4f6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .instructor-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructor-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .instructor-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .instructor-info h4 {
+            color: #1f2937;
+            margin-bottom: 0.3rem;
+        }
+
+        .instructor-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .lesson-history {
+            margin-top: 2rem;
+        }
+
+        .lesson-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-info h4 {
+            color: #1f2937;
+            margin-bottom: 0.3rem;
+        }
+
+        .lesson-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .lesson-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-scheduled {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-cancelled {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .profile-form {
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #d1d5db;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .main-content {
+                order: 1;
+            }
+
+            .header-content {
+                text-align: center;
+            }
+
+            .welcome-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-car"></i>
+                    <span>e-Instrutor</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="painel-aluno.html" class="nav-link">Painel</a></li>
+                    <li><a href="buscar-instrutores.html" class="nav-link">Buscar Instrutores</a></li>
+                    <li><a href="#" class="nav-link" onclick="logout()">Sair</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="welcome-text">
+                        <h1 id="welcomeMessage">Bem-vindo, Aluno!</h1>
+                        <p>Gerencie suas aulas e encontre novos instrutores</p>
+                    </div>
+                    <div class="header-actions">
+                        <a href="buscar-instrutores.html" class="btn-header">
+                            <i class="fas fa-search"></i>
+                            Buscar Instrutores
+                        </a>
+                        <a href="#" class="btn-header" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li>
+                        <a href="#" class="menu-link active" data-section="dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link" data-section="lessons">
+                            <i class="fas fa-calendar-alt"></i>
+                            Minhas Aulas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link" data-section="instructors">
+                            <i class="fas fa-users"></i>
+                            Meus Instrutores
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link" data-section="payments">
+                            <i class="fas fa-credit-card"></i>
+                            Pagamentos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-link" data-section="profile">
+                            <i class="fas fa-user-cog"></i>
+                            Meu Perfil
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Dashboard Section -->
+                <div class="content-section active" id="dashboard">
+                    <h2 class="section-title">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </h2>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-check"></i>
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Aulas Realizadas</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Aulas Agendadas</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Instrutores</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-star"></i>
+                            <div class="stat-number">4.8</div>
+                            <div class="stat-label">Avaliação Média</div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <div class="action-card" onclick="showSection('lessons')">
+                            <i class="fas fa-plus-circle"></i>
+                            <h3>Agendar Aula</h3>
+                            <p>Agende uma nova aula com seus instrutores</p>
+                        </div>
+                        <div class="action-card" onclick="window.location.href='buscar-instrutores.html'">
+                            <i class="fas fa-search"></i>
+                            <h3>Encontrar Instrutor</h3>
+                            <p>Busque novos instrutores em sua região</p>
+                        </div>
+                        <div class="action-card" onclick="showSection('payments')">
+                            <i class="fas fa-receipt"></i>
+                            <h3>Ver Pagamentos</h3>
+                            <p>Consulte seu histórico de pagamentos</p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-history">
+                        <h3>Próximas Aulas</h3>
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Aula com João Silva</h4>
+                                <p>Amanhã, 14:00 - Direção Defensiva</p>
+                            </div>
+                            <span class="lesson-status status-scheduled">Agendada</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Aula com Maria Santos</h4>
+                                <p>Sexta-feira, 16:00 - Baliza</p>
+                            </div>
+                            <span class="lesson-status status-scheduled">Agendada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lessons Section -->
+                <div class="content-section" id="lessons">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar-alt"></i>
+                        Minhas Aulas
+                    </h2>
+
+                    <div class="lesson-history">
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Aula com João Silva</h4>
+                                <p>Hoje, 14:00 - Direção Defensiva</p>
+                            </div>
+                            <span class="lesson-status status-scheduled">Agendada</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Aula com Maria Santos</h4>
+                                <p>Ontem, 16:00 - Baliza</p>
+                            </div>
+                            <span class="lesson-status status-completed">Concluída</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Aula com João Silva</h4>
+                                <p>Segunda-feira, 10:00 - Primeira Aula</p>
+                            </div>
+                            <span class="lesson-status status-cancelled">Cancelada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructors Section -->
+                <div class="content-section" id="instructors">
+                    <h2 class="section-title">
+                        <i class="fas fa-users"></i>
+                        Meus Instrutores
+                    </h2>
+
+                    <div class="instructor-list">
+                        <div class="instructor-card">
+                            <div class="instructor-header">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" alt="João Silva" class="instructor-photo">
+                                <div class="instructor-info">
+                                    <h4>João Silva</h4>
+                                    <div class="instructor-rating">
+                                        <span class="stars">★★★★★</span>
+                                        <span>4.8 (127 avaliações)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>8 aulas realizadas</p>
+                            <button class="btn-primary" onclick="contactInstructor(1)">Entrar em Contato</button>
+                        </div>
+
+                        <div class="instructor-card">
+                            <div class="instructor-header">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face" alt="Maria Santos" class="instructor-photo">
+                                <div class="instructor-info">
+                                    <h4>Maria Santos</h4>
+                                    <div class="instructor-rating">
+                                        <span class="stars">★★★★★</span>
+                                        <span>4.9 (89 avaliações)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>4 aulas realizadas</p>
+                            <button class="btn-primary" onclick="contactInstructor(2)">Entrar em Contato</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payments Section -->
+                <div class="content-section" id="payments">
+                    <h2 class="section-title">
+                        <i class="fas fa-credit-card"></i>
+                        Histórico de Pagamentos
+                    </h2>
+
+                    <div class="lesson-history">
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Pagamento para João Silva</h4>
+                                <p>Aula de Direção Defensiva - 02/10/2024</p>
+                            </div>
+                            <span class="lesson-status status-completed">R$ 80,00</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Pagamento para Maria Santos</h4>
+                                <p>Aula de Baliza - 01/10/2024</p>
+                            </div>
+                            <span class="lesson-status status-completed">R$ 90,00</span>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>Pagamento para João Silva</h4>
+                                <p>Primeira Aula - 30/09/2024</p>
+                            </div>
+                            <span class="lesson-status status-completed">R$ 80,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div class="content-section" id="profile">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-cog"></i>
+                        Meu Perfil
+                    </h2>
+
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" value="Maria Aluna">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" value="maria@teste.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" value="(11) 99999-9999">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" id="cidade" name="cidade" value="São Paulo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipoHabilitacao">Tipo de Habilitação Desejada</label>
+                            <select id="tipoHabilitacao" name="tipoHabilitacao">
+                                <option value="B" selected>Categoria B (Carro)</option>
+                                <option value="A">Categoria A (Moto)</option>
+                                <option value="AB">Categoria A + B</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i>
+                            Salvar Alterações
+                        </button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se o usuário está logado
+            if (!auth.isLoggedIn() || auth.getCurrentUser().type !== 'aluno') {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Atualizar mensagem de boas-vindas
+            const user = auth.getCurrentUser();
+            document.getElementById('welcomeMessage').textContent = `Bem-vindo, ${user.nome}!`;
+
+            // Configurar navegação do sidebar
+            setupSidebarNavigation();
+
+            // Configurar formulário de perfil
+            setupProfileForm();
+        });
+
+        function setupSidebarNavigation() {
+            const menuLinks = document.querySelectorAll('.menu-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Remover classe active de todos os links e seções
+                    menuLinks.forEach(l => l.classList.remove('active'));
+                    contentSections.forEach(s => s.classList.remove('active'));
+                    
+                    // Adicionar classe active ao link clicado e seção correspondente
+                    this.classList.add('active');
+                    document.getElementById(targetSection).classList.add('active');
+                });
+            });
+        }
+
+        function setupProfileForm() {
+            const profileForm = document.getElementById('profileForm');
+            
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simular salvamento do perfil
+                notifications.show('Perfil atualizado com sucesso!', 'success');
+            });
+        }
+
+        function showSection(sectionId) {
+            const menuLink = document.querySelector(`[data-section="${sectionId}"]`);
+            if (menuLink) {
+                menuLink.click();
+            }
+        }
+
+        function contactInstructor(instrutorId) {
+            notifications.show('Abrindo chat com o instrutor...', 'info');
+            // Em um sistema real, isso abriria um chat ou formulário de contato
+        }
+
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                auth.logout();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Simular dados dinâmicos
+        function updateDashboardStats() {
+            // Em um sistema real, estes dados viriam de uma API
+            const stats = {
+                aulasRealizadas: Math.floor(Math.random() * 20) + 5,
+                aulasAgendadas: Math.floor(Math.random() * 5) + 1,
+                instrutores: Math.floor(Math.random() * 3) + 1,
+                avaliacaoMedia: (Math.random() * 1 + 4).toFixed(1)
+            };
+
+            // Atualizar os números na interface (implementação simplificada)
+            console.log('Stats atualizadas:', stats);
+        }
+
+        // Atualizar stats periodicamente
+        setInterval(updateDashboardStats, 30000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Instrutor - e-Instrutor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .profile-container {
+            min-height: 100vh;
+            background: #f8fafc;
+            padding-top: 100px;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .profile-hero {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .instructor-photo-large {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .instructor-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .instructor-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .instructor-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .profile-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .main-profile {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-profile {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .about-text {
+            color: #6b7280;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .vehicle-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .vehicle-photo {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .vehicle-details h4 {
+            color: #1f2937;
+            margin-bottom: 0.3rem;
+        }
+
+        .vehicle-details p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .contact-info li:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info i {
+            color: #2563eb;
+            width: 20px;
+        }
+
+        .price-info {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .price-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .price-label {
+            opacity: 0.9;
+        }
+
+        .btn-book {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .btn-book:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-contact {
+            width: 100%;
+            background: transparent;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-contact:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .reviews-section {
+            margin-top: 2rem;
+        }
+
+        .review-item {
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .reviewer-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .review-rating {
+            color: #fbbf24;
+        }
+
+        .review-text {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .review-date {
+            color: #9ca3af;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .specialty-tag {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .coverage-area {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .coverage-area strong {
+            color: #1f2937;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2563eb;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .profile-hero {
+                text-align: center;
+                flex-direction: column;
+            }
+
+            .instructor-info h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-profile,
+            .profile-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-car"></i>
+                    <span>e-Instrutor</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="buscar-instrutores.html" class="nav-link">Buscar Instrutores</a></li>
+                    <li><a href="login.html" class="nav-link login-btn">Entrar</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="container">
+                <div class="profile-hero">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="João Silva" class="instructor-photo-large">
+                    <div class="instructor-info">
+                        <h1>João Silva</h1>
+                        <div class="instructor-rating">
+                            <span class="stars">★★★★★</span>
+                            <span>4.8 (127 avaliações)</span>
+                        </div>
+                        <div class="instructor-badges">
+                            <span class="badge">
+                                <i class="fas fa-medal"></i>
+                                Instrutor Verificado
+                            </span>
+                            <span class="badge">
+                                <i class="fas fa-clock"></i>
+                                8 anos de experiência
+                            </span>
+                            <span class="badge">
+                                <i class="fas fa-graduation-cap"></i>
+                                Especialista em Primeira Habilitação
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <a href="buscar-instrutores.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Voltar à Busca
+            </a>
+
+            <div class="profile-content">
+                <!-- Main Profile Content -->
+                <div class="main-profile">
+                    <h2 class="section-title">
+                        <i class="fas fa-user"></i>
+                        Sobre o Instrutor
+                    </h2>
+                    
+                    <p class="about-text">
+                        Instrutor de direção com 8 anos de experiência, especializado em primeira habilitação 
+                        e direção defensiva. Formado em cursos de capacitação pelo DETRAN-SP, com foco em 
+                        ensinar técnicas seguras e eficientes de condução. Tenho orgulho de ter ajudado mais 
+                        de 300 alunos a conquistarem sua CNH com segurança e confiança.
+                    </p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">300+</div>
+                            <div class="stat-label">Alunos Aprovados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Taxa de Aprovação</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Anos de Experiência</div>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title">
+                        <i class="fas fa-star"></i>
+                        Especialidades
+                    </h3>
+                    
+                    <div class="specialties">
+                        <span class="specialty-tag">Primeira Habilitação</span>
+                        <span class="specialty-tag">Direção Defensiva</span>
+                        <span class="specialty-tag">Baliza</span>
+                        <span class="specialty-tag">Estacionamento</span>
+                        <span class="specialty-tag">Direção Noturna</span>
+                        <span class="specialty-tag">Autoestrada</span>
+                    </div>
+
+                    <h3 class="section-title">
+                        <i class="fas fa-car"></i>
+                        Veículo Disponível
+                    </h3>
+                    
+                    <div class="vehicle-info">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=80&h=60&fit=crop" alt="Honda Civic" class="vehicle-photo">
+                        <div class="vehicle-details">
+                            <h4>Honda Civic 2020</h4>
+                            <p>Sedan • Automático • Ar condicionado • Direção hidráulica</p>
+                        </div>
+                    </div>
+
+                    <h3 class="section-title">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Área de Atendimento
+                    </h3>
+                    
+                    <div class="coverage-area">
+                        <p><strong>Cidade Base:</strong> São Paulo, SP</p>
+                        <p><strong>Regiões Atendidas:</strong></p>
+                        <ul style="margin-left: 1.5rem; color: #6b7280;">
+                            <li>Centro de São Paulo</li>
+                            <li>Vila Madalena</li>
+                            <li>Pinheiros</li>
+                            <li>Jardins</li>
+                            <li>Moema</li>
+                            <li>Vila Olímpia</li>
+                        </ul>
+                    </div>
+
+                    <div class="reviews-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-comments"></i>
+                            Avaliações dos Alunos
+                        </h3>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Ana Silva" class="reviewer-photo">
+                                    <span class="reviewer-name">Ana Silva</span>
+                                </div>
+                                <div class="review-rating">★★★★★</div>
+                            </div>
+                            <p class="review-text">
+                                Excelente instrutor! Muito paciente e didático. Me ajudou a superar o medo 
+                                de dirigir e passei no exame de primeira. Recomendo demais!
+                            </p>
+                            <div class="review-date">Há 2 semanas</div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Carlos Santos" class="reviewer-photo">
+                                    <span class="reviewer-name">Carlos Santos</span>
+                                </div>
+                                <div class="review-rating">★★★★★</div>
+                            </div>
+                            <p class="review-text">
+                                Profissional exemplar. Ensina com muita calma e segurança. As aulas são 
+                                bem estruturadas e ele sempre dá dicas importantes para a prova.
+                            </p>
+                            <div class="review-date">Há 1 mês</div>
+                        </div>
+
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face" alt="Maria Oliveira" class="reviewer-photo">
+                                    <span class="reviewer-name">Maria Oliveira</span>
+                                </div>
+                                <div class="review-rating">★★★★☆</div>
+                            </div>
+                            <p class="review-text">
+                                Muito bom instrutor, me ensinou direção defensiva e agora me sinto muito 
+                                mais segura no trânsito. Pontual e responsável.
+                            </p>
+                            <div class="review-date">Há 2 meses</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar-profile">
+                    <!-- Price and Booking -->
+                    <div class="profile-card">
+                        <div class="price-info">
+                            <div class="price-value">R$ 80</div>
+                            <div class="price-label">por aula</div>
+                        </div>
+                        
+                        <button class="btn-book" onclick="bookLesson()">
+                            <i class="fas fa-calendar-plus"></i>
+                            Agendar Aula
+                        </button>
+                        
+                        <button class="btn-contact" onclick="contactInstructor()">
+                            <i class="fas fa-phone"></i>
+                            Entrar em Contato
+                        </button>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="profile-card">
+                        <h3 class="section-title">
+                            <i class="fas fa-address-card"></i>
+                            Informações de Contato
+                        </h3>
+                        
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>(11) 99999-9999</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>joao.silva@email.com</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>São Paulo, SP</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-id-card"></i>
+                                <span>CNH: 12345678901</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="profile-card">
+                        <h3 class="section-title">
+                            <i class="fas fa-chart-bar"></i>
+                            Estatísticas
+                        </h3>
+                        
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Última aula: Hoje</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <span>Tempo de resposta: 2h</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-users"></i>
+                                <span>12 alunos ativos</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-medal"></i>
+                                <span>Membro desde 2016</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar dados do instrutor baseado no ID da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const instrutorId = urlParams.get('id');
+            
+            if (instrutorId) {
+                loadInstructorProfile(instrutorId);
+            }
+        });
+
+        function loadInstructorProfile(id) {
+            // Em um sistema real, isso faria uma requisição à API
+            // Por enquanto, usamos dados simulados
+            console.log('Carregando perfil do instrutor ID:', id);
+        }
+
+        function bookLesson() {
+            // Verificar se o usuário está logado
+            if (!auth.isLoggedIn()) {
+                notifications.show('Você precisa estar logado para agendar uma aula.', 'warning');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+                return;
+            }
+
+            // Verificar se é um aluno
+            const user = auth.getCurrentUser();
+            if (user.type !== 'aluno') {
+                notifications.show('Apenas alunos podem agendar aulas.', 'error');
+                return;
+            }
+
+            // Simular agendamento
+            notifications.show('Redirecionando para agendamento...', 'info');
+            
+            // Em um sistema real, isso abriria um modal ou página de agendamento
+            setTimeout(() => {
+                notifications.show('Solicitação de aula enviada! O instrutor entrará em contato.', 'success');
+            }, 2000);
+        }
+
+        function contactInstructor() {
+            // Verificar se o usuário está logado
+            if (!auth.isLoggedIn()) {
+                notifications.show('Você precisa estar logado para entrar em contato.', 'warning');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+                return;
+            }
+
+            // Simular abertura de chat ou formulário de contato
+            notifications.show('Abrindo chat com o instrutor...', 'info');
+            
+            // Em um sistema real, isso abriria um chat ou formulário de contato
+            setTimeout(() => {
+                notifications.show('Chat iniciado! Você pode conversar com João Silva.', 'success');
+            }, 1500);
+        }
+
+        // Simular carregamento dinâmico de dados
+        function loadDynamicData() {
+            // Em um sistema real, isso carregaria dados atualizados do servidor
+            console.log('Carregando dados dinâmicos...');
+        }
+
+        // Carregar dados dinâmicos ao carregar a página
+        loadDynamicData();
+    </script>
+</body>
+</html>
