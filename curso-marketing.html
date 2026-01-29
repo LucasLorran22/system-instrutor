@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento de Redes Sociais para Instrutores - e-Instrutor Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="curso-marketing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-car"></i>
+                    <span>e-Instrutor Academy</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="area_cursos.html" class="nav-link">Voltar</a></li>
+                    <li><a href="#" class="nav-link login-btn" onclick="logout()">Sair</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="course-container">
+        <!-- Sidebar com Módulos -->
+        <aside class="course-sidebar">
+            <div class="sidebar-header">
+                <h2>Treinamento de Redes Sociais</h2>
+                <p class="course-subtitle">🚦📱 Para Instrutores</p>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>Progresso do Curso</span>
+                    <span class="progress-percentage" id="progressPercentage">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text">
+                    <span id="completedLessons">0</span> de <span id="totalLessons">15</span> aulas concluídas
+                </p>
+            </div>
+
+            <nav class="modules-nav">
+                <!-- Módulo 1 -->
+                <div class="module">
+                    <button class="module-title" onclick="toggleModule(this)">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Módulo 1: Mentalidade & Posicionamento</span>
+                        <span class="module-progress">0/3</span>
+                    </button>
+                    <ul class="lessons-list">
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="1-1" onclick="loadLesson(event, '1-1')">
+                                <i class="fas fa-circle"></i>
+                                <span>Instrutor ≠ Influencer</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="1-2" onclick="loadLesson(event, '1-2')">
+                                <i class="fas fa-circle"></i>
+                                <span>Autoridade Local vs Seguidores</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="1-3" onclick="loadLesson(event, '1-3')">
+                                <i class="fas fa-circle"></i>
+                                <span>Marketing sem Parecer Vendedor</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 2 -->
+                <div class="module">
+                    <button class="module-title" onclick="toggleModule(this)">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Módulo 2: Instagram e WhatsApp na Prática</span>
+                        <span class="module-progress">0/4</span>
+                    </button>
+                    <ul class="lessons-list">
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="2-1" onclick="loadLesson(event, '2-1')">
+                                <i class="fas fa-circle"></i>
+                                <span>Perfil Profissional do Zero</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="2-2" onclick="loadLesson(event, '2-2')">
+                                <i class="fas fa-circle"></i>
+                                <span>Bio que Vende Sem Vender</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="2-3" onclick="loadLesson(event, '2-3')">
+                                <i class="fas fa-circle"></i>
+                                <span>Foto, Nome e Destaque</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="2-4" onclick="loadLesson(event, '2-4')">
+                                <i class="fas fa-circle"></i>
+                                <span>WhatsApp como Funil de Matrícula</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 3 -->
+                <div class="module">
+                    <button class="module-title" onclick="toggleModule(this)">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Módulo 3: Conteúdo que Atrai Alunos</span>
+                        <span class="module-progress">0/4</span>
+                    </button>
+                    <ul class="lessons-list">
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="3-1" onclick="loadLesson(event, '3-1')">
+                                <i class="fas fa-circle"></i>
+                                <span>Erros Comuns de Alunos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="3-2" onclick="loadLesson(event, '3-2')">
+                                <i class="fas fa-circle"></i>
+                                <span>Bastidores das Aulas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="3-3" onclick="loadLesson(event, '3-3')">
+                                <i class="fas fa-circle"></i>
+                                <span>Dicas Simples de Prova Prática</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="3-4" onclick="loadLesson(event, '3-4')">
+                                <i class="fas fa-circle"></i>
+                                <span>Histórias Reais de Aprovação</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 4 -->
+                <div class="module">
+                    <button class="module-title" onclick="toggleModule(this)">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Módulo 4: Engajamento Local</span>
+                        <span class="module-progress">0/3</span>
+                    </button>
+                    <ul class="lessons-list">
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="4-1" onclick="loadLesson(event, '4-1')">
+                                <i class="fas fa-circle"></i>
+                                <span>Como Ser Visto na Sua Cidade</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="4-2" onclick="loadLesson(event, '4-2')">
+                                <i class="fas fa-circle"></i>
+                                <span>Localização e Hashtags Locais</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="4-3" onclick="loadLesson(event, '4-3')">
+                                <i class="fas fa-circle"></i>
+                                <span>Parcerias Estratégicas</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Módulo 5 -->
+                <div class="module">
+                    <button class="module-title" onclick="toggleModule(this)">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Módulo 5: Conversão (A Parte que Mais Importa)</span>
+                        <span class="module-progress">0/3</span>
+                    </button>
+                    <ul class="lessons-list">
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="5-1" onclick="loadLesson(event, '5-1')">
+                                <i class="fas fa-circle"></i>
+                                <span>Como Responder DM</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="5-2" onclick="loadLesson(event, '5-2')">
+                                <i class="fas fa-circle"></i>
+                                <span>Conversa em Matrícula</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lesson-link" data-lesson="5-3" onclick="loadLesson(event, '5-3')">
+                                <i class="fas fa-circle"></i>
+                                <span>Scripts Éticos e Cobrança</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="course-main">
+            <!-- Lesson Player -->
+            <div class="lesson-container">
+                <div class="video-player">
+                    <div class="video-placeholder" id="videoPlaceholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Selecione uma aula para começar</p>
+                    </div>
+                </div>
+
+                <div class="lesson-info">
+                    <div class="lesson-header">
+                        <h1 id="lessonTitle">Bem-vindo ao Treinamento</h1>
+                        <div class="lesson-meta">
+                            <span class="lesson-module" id="lessonModule">Introdução</span>
+                            <span class="lesson-duration" id="lessonDuration">
+                                <i class="fas fa-clock"></i>
+                                15 min
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="lesson-content" id="lessonContent">
+                        <div class="welcome-content">
+                            <h2>Bem-vindo ao Treinamento de Redes Sociais para Instrutores! 🚦📱</h2>
+                            <p>
+                                Este é um treinamento <strong>hiper nichado</strong> e prático, desenvolvido especialmente 
+                                para instrutores de direção que querem crescer sem depender de autoescola.
+                            </p>
+                            <p>
+                                Aqui você vai aprender a se posicionar como referência na sua cidade, gerar confiança 
+                                antes mesmo da primeira aula e, mais importante, converter seguidores em alunos pagantes.
+                            </p>
+                            <p style="font-size: 0.95rem; color: #6b7280; margin-top: 1.5rem;">
+                                <strong>Importante:</strong> Não é um curso genérico de marketing. Tudo aqui é específico 
+                                para o universo de instrutores de direção. Zero "marketingês", 100% prático.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lesson-navigation">
+                        <button class="btn-nav btn-prev" id="btnPrev" onclick="previousLesson()" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                            Aula Anterior
+                        </button>
+                        <button class="btn-complete" id="btnComplete" onclick="completeLesson()">
+                            <i class="fas fa-check-circle"></i>
+                            Marcar como Concluída
+                        </button>
+                        <button class="btn-nav btn-next" id="btnNext" onclick="nextLesson()">
+                            Próxima Aula
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recursos Adicionais -->
+            <div class="resources-section">
+                <h3>Recursos Adicionais</h3>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <i class="fas fa-download"></i>
+                        <h4>Planilha de Planejamento</h4>
+                        <p>Organize seu conteúdo para 30 dias</p>
+                        <a href="#" class="resource-link">Baixar</a>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-file-pdf"></i>
+                        <h4>Guia de Hashtags Locais</h4>
+                        <p>Hashtags prontas para sua região</p>
+                        <a href="#" class="resource-link">Baixar</a>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-comments"></i>
+                        <h4>Scripts de Resposta</h4>
+                        <p>Templates para responder DM</p>
+                        <a href="#" class="resource-link">Baixar</a>
+                    </div>
+                    <div class="resource-card">
+                        <i class="fas fa-images"></i>
+                        <h4>Templates de Posts</h4>
+                        <p>Modelos prontos para Instagram</p>
+                        <a href="#" class="resource-link">Baixar</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Conclusão -->
+    <div class="modal" id="completionModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <i class="fas fa-check-circle"></i>
+                <h2>Parabéns!</h2>
+                <p id="modalMessage">Você concluiu esta aula com sucesso.</p>
+                <button class="btn-primary" onclick="closeModal()">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="curso-marketing.js"></script>
+</body>
+</html>
